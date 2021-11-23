@@ -1,0 +1,54 @@
+void setup() {
+  Serial.begin(9600); // initialize serial communications
+  //pinMode(12,INPUT );    // sets the digital pin 12
+ // pinMode(11,INPUT );    // sets the digital pin 12
+  //pinMode(10,INPUT );    // sets the digital pin 12
+  //pinMode(9,INPUT );    // sets the digital pin 12
+}
+char * Instruments(int value) {
+  if (value >= 900) {
+    return "0";
+  }
+
+  else return "1";
+}
+
+char * volume(int total1,int total2,int total3,int total4) {
+  if (total1 >= 200) {
+    return "2";
+  }
+    if (total2 >= 200) {
+    return "3";
+  }
+     if (total3 >= 200) {
+    return "4";
+  }
+    if (total4 >= 200) {
+    return "5";
+  }
+  else return "0";
+}
+
+void loop() {
+  long total1 =  cs_12_11.capacitiveSensor(30);
+  long total2 =  cs_10_9.capacitiveSensor(30);
+  long total3 =  cs_8_7.capacitiveSensor(30);
+  long total4 =  cs_6_5.capacitiveSensor(30);
+  int Instruments2 = analogRead(A0);                  // Analogread the input pin (Instruments 1)
+
+  int Instruments1 = analogRead(A3);                  // Analogread the input pin (Instruments 2)
+
+  int Instruments3 = analogRead(A2);                  // Analogread the input pin (Instruments 3)
+
+  int Instruments4 = analogRead(A1);                  // Analogread the input pin (Instruments 4)
+   
+  
+
+  
+  Serial.print(Instruments(Instruments1));
+  Serial.print(Instruments(Instruments2));
+  Serial.print(Instruments(Instruments3));
+  Serial.print(Instruments(Instruments4));
+  Serial.println(volume(total1,total2,total3,total4));
+  
+}
